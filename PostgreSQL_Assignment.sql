@@ -61,8 +61,23 @@ INSERT into students (student_name, age, email, frontend_mark, backend_mark, sta
 VALUES ('Sameer',   21,	'sameer15@example.com',	48,	60,	NULL);
 
 
--- 
+-- Find all students enrolled in the 'Next.js' course
 SELECT student_name from enrollment
     JOIN students USING(student_id)
     JOIN courses USING(course_id)
     where course_name = 'Next.js';
+
+
+-- Delete all courses that have no students enrolled
+DELETE FROM courses
+    WHERE course_id NOT IN(
+        SELECT course_id FROM enrollment
+    );
+
+-- Retrieve the names of students using a limit of 2, starting from the 3rd student.
+SELECT student_name FROM students LIMIT 2 OFFSET 2;
+
+-- 
+SELECT course_name, count(*) as students_enrolled FROM enrollment
+    JOIN courses USING(course_id)
+    GROUP BY course_name;

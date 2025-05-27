@@ -54,3 +54,15 @@ VALUES (1, 1),
 SELECT * FROM students;
 SELECT * FROM courses;
 SELECT * FROM enrollment;
+
+
+-- Insert a student with a NULL status
+INSERT into students (student_name, age, email, frontend_mark, backend_mark, status)
+VALUES ('Sameer',   21,	'sameer15@example.com',	48,	60,	NULL);
+
+
+-- 
+SELECT student_name from enrollment
+    JOIN students USING(student_id)
+    JOIN courses USING(course_id)
+    where course_name = 'Next.js';
